@@ -88,11 +88,13 @@ BCM BINARY_CODE_TO_SEND PROTOCOL SHORT DISTANCE LONG DISTANCE PACKET DISTANCE [N
 22  e.g. 00000001       (0 or 1) 142            403           4067            default: 5
 ```
 
-Command line options to use:
-----------------------------
+Informations:
+-------------
 - You will get the right port on your pi with command 'gpio readall'
 - Binary Code can include spaces or other chars
 - Protocol is 0 for binary and 1 for inverted binary
+
+So this is what we are using as options in our example:
 
 * In our example BCM is -> 22 (Pin 15 on Raspberry)
 * The binary code above is "11011101 01011001 11000111 0"
