@@ -17,7 +17,7 @@ Connect pin VCC of the MX-FS-03V with 5V (Pin 2 on Raspberry) and GND with GROUN
 Pin 22 in the GPIO-World.
 
 Use the command "gpio readall" for an overview:
-
+```
  +-----+-----+---------+------+---+---Pi 3---+---+------+---------+-----+-----+
  | BCM | wPi |   Name  | Mode | V | Physical | V | Mode | Name    | wPi | BCM |
  +-----+-----+---------+------+---+----++----+---+------+---------+-----+-----+
@@ -44,7 +44,7 @@ Use the command "gpio readall" for an overview:
  +-----+-----+---------+------+---+----++----+---+------+---------+-----+-----+
  | BCM | wPi |   Name  | Mode | V | Physical | V | Mode | Name    | wPi | BCM |
  +-----+-----+---------+------+---+---Pi 3---+---+------+---------+-----+-----+
-
+```
 Software setup
 --------------
 
@@ -60,6 +60,7 @@ Lets try to act as a Chuango Alarmsystem ;)
 
 This is what we get with RTL 433 when a door sensor transmits a signal:
 
+```
 2019-01-06 19:12:13|Chuango Security Technology
 {"time" : "2019-01-06 19:12:13", "model" : "Chuango Security Technology", "id" : 906652, "cmd" : "Normal Zone", "cmd_id" : 7} > *** signal_start = -1712433787, signal_end = -1712281227, signal_len = 152560, pulses_found = 572
 Iteration 1. t: 206    min: 30 (485)    max: 382 (87)    delta 884
@@ -76,43 +77,31 @@ bitbuffer:: Number of rows: 6
 [03] {25} dd 59 c7 00                                                                                                          : 11011101 01011001 11000111 0
 [04] {25} dd 59 c7 00                                                                                                          : 11011101 01011001 11000111 0
 [05] {25} dd 59 c7 00                                                                                                          : 11011101 01011001 11000111 0
-
+```
 -------------------------------------------------------------------------------------------------------------------------------
 
 And this it what my script needs:
 
+```
 ./rpi_modulate.py
 BCM BINARY_CODE_TO_SEND PROTOCOL SHORT DISTANCE LONG DISTANCE PACKET DISTANCE [NUM_ATTEMPTS] [SHORT PULSE] [LONG_PULSE]
 22  e.g. 00000001       (0 or 1) 142            403           4067            default: 5
+```
 
-Informations:
--------------
+Command line options to use:
+----------------------------
 - You will get the right port on your pi with command 'gpio readall'
 - Binary Code can include spaces or other chars
 - Protocol is 0 for binary and 1 for inverted binary
 
-# In our example BCM is -> 22 (Pin 15 on Raspberry)
-# The binary code above is "11011101 01011001 11000111 0"
-# The protocol is "1" for inverted signals
-# Short distance is 132
-# Long distance is 392
-# Packet distance is 4467
-# We use the default of 5 attempts for sending the signals
+* In our example BCM is -> 22 (Pin 15 on Raspberry)
+* The binary code above is "11011101 01011001 11000111 0"
+* The protocol is "1" for inverted signals
+* Short distance is 132
+* Long distance is 392
+* Packet distance is 4467
+* We use the default of 5 attempts for sending the signals
 
 You have to play a bit with short, long and packet distance until you have the right settings, check them with rtl 433.
 
 Have fun!
-
-
-
-
-
-
-
-
-
-
-
-
-
-
